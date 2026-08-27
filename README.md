@@ -217,6 +217,6 @@ Purpose
 
 The Odysseus Ocean Floor Monitoring System demonstrates the combination of embedded systems, sensor monitoring, data processing, and visualization.
 
-The Arduino/Tinkercad component focuses on sensor input and state-machine control, while the Python component focuses on processing and visualizing ocean-floor depth data.
+The Arduino/Tinkercad component focuses on sensor input and state-machine control, while the Python component focuses on processing and visualizing ocean-floor depth data.https://www.tinkercad.com/things/3CIznUxZfU8-sedsaurduino?sharecode=1vJ5N5RSlcfiVbK8GGNGWLaZgiq7FBqAOhhL6DhOij0
 
 The long-term goal is to connect these components so that sensor measurements can be collected by the Arduino and visualized live in Python.
