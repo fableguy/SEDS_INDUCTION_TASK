@@ -1,0 +1,73 @@
+import csv
+import matplotlib.pyplot as plt
+import time
+
+points = []
+depth = []
+
+plt.ion()
+
+fig, ax = plt.subplots(figsize=(8, 4.5))
+
+line, = ax.plot([], [], marker='o', label="Depth")
+
+ax.set_title("Odysseus Ocean Floor Depth Analysis")
+ax.set_xlabel("Points")
+ax.set_ylabel("Depth")
+ax.legend()
+ax.grid(True)
+
+with open('Depth Data.csv', mode='r', newline='', encoding='utf-8') as f:
+
+    reader = csv.reader(f)
+    header = next(reader)
+
+    for row in reader:
+
+        try:
+            # Convert BOTH values first
+            point = float(row[0])
+            d = float(row[1])
+
+            # Handle suspicious values
+
+            # Point 151: extreme value
+            if d == -1271.1:
+
+                if len(depth) > 0:
+                    d = depth[-1]
+
+                print("Corrected extreme value at point", point)
+
+            # Point 276: suspicious zero
+            elif d == 0:
+
+                if len(depth) > 0:
+                    d = depth[-1]
+
+                print("Corrected zero value at point", point)
+
+            # Only append AFTER both values are valid
+            points.append(point)
+            depth.append(d)
+
+            # Update graph
+            line.set_data(points, depth)
+
+            # Adjust axes
+            ax.relim()
+            ax.autoscale_view()
+
+            # Draw updated graph
+            fig.canvas.draw()
+            fig.canvas.flush_events()
+
+            # Speed of simulation
+            time.sleep(0.5)
+
+        except (ValueError, IndexError):
+
+            print("Skipping corrupt row:", row)
+
+plt.ioff()
+plt.show()
